@@ -25,13 +25,10 @@ const (
 	screenHeight = 720
 )
 
-// repeatingKeyPressed return true when key is pressed considering the repeat state.
-
 func main() {
 	g := create_g()
-	g.readSentence()
 	ebiten.SetWindowSize(screenWidth, screenHeight)
-	ebiten.SetWindowTitle("TypeWriter (Ebiten Demo)")
+	ebiten.SetWindowTitle("typing game")
 	if err := ebiten.RunGame(g); err != nil {
 		log.Fatal(err)
 	}
