@@ -50,17 +50,14 @@ func (g *Game) AddResult(new float64) []float64 {
 		os.Exit(1)
 	}
 	defer f.Close()
-
-	s := bufio.NewReader(f)
 	var results []float64
-	for {
-
-		line, err := s.ReadString('\n')
+	scanner := bufio.NewScanner(f)
+	for scanner.Scan() {
 		if err == io.EOF {
 			break
 		}
-		if line != "\n" {
-			value, err := strconv.ParseFloat(strings.TrimRight(line, "\n"), 64)
+		if scanner.Text() != "\n" {
+			value, err := strconv.ParseFloat(strings.TrimRight(scanner.Text(), "\n"), 64)
 			results = append(results, value)
 			if err != nil {
 				fmt.Fprintln(os.Stderr, "エラー：", err)
